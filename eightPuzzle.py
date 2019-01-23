@@ -18,8 +18,8 @@ def showState(mat):
 
 #generates the sucessor having best h(n)
 def generateSucessor(current,goal):
-   x = getXPosOfZero(current)
-   y = getYposOfZero(current)
+   x = getXPos(current,0)
+   y = getYpos(current,0)
    heurasticleft = 0
    heurasticright = 0
    heurastictop = 0
@@ -99,31 +99,32 @@ def bottomChild(current):
 
 #calculates the h(n)
 def calculateHeuristic(current,goal):
-     x = getXPosOfZero(current)
-     y = getYPosOfZero(current)
-     x1 = getXPosOfZero(goal)
-     y1 = getYPosOfZero(goal)
-     manhattan = math.abs(x1 - x) + math.abs(y1 - y)
-     return manhattan
+     h = 0
+     for i in range(0,3):
+            for j in range(0,3):
+                  x = getXPos(current,current[i][j])
+                  y = getYPos(current,current[i][j])
+                  x1 = getXPos(goal,goal[i][j])
+                  y1 = getYPos(goal[i][j])
+                  manhattan = math.abs(x1 - x) + math.abs(y1 - y)
+                  h = h + manhattan
+     return h
     
 
 #calculates the x position of zero
-def getXPosOfZero(current):
-    #current = ast.literal_eval(current)
-    b = 0
+def getXPos(current,val):
     for i in range(0,3):
         for j in range(0,3):
-            if current[i][j] == b:
+            if current[i][j] == val:
                 return i
             else:
                 continue
             
 #caluclates the y position of zero
-def getYposOfZero(current):
-    a = 0
+def getYpos(current,val):
     for i in range(0,3):
         for j in range(0,3):
-            if current[i][j] == a:
+            if current[i][j] == val:
                 return j
             else:
                 continue
