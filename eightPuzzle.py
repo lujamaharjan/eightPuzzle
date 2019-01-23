@@ -1,4 +1,3 @@
-import ast
 
 #for taking input from user
 def inputState():
@@ -100,14 +99,12 @@ def bottomChild(current):
 
 #calculates the h(n)
 def calculateHeuristic(current,goal):
-    h = 0
-    for k in range(0,3):
-        for l in range (0,3):
-            if current[k][l] == goal[k][l]:
-                h = h + 1
-            else:
-                h = h - 1
-    return h
+     x = getXPosOfZero(current)
+     y = getYPosOfZero(current)
+     x1 = getXPosOfZero(goal)
+     y1 = getYPosOfZero(goal)
+     manhattan = math.abs(x1 - x) + math.abs(y1 - y)
+     return manhattan
     
 
 #calculates the x position of zero
